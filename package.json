@@ -2,10 +2,12 @@
   "name": "xhr-http",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "tsc",
+    "pub": "tsc && npm pack && npm publish"
   },
   "repository": {
     "type": "git",
@@ -17,8 +19,10 @@
   "bugs": {
     "url": "https://github.com/xzcode/xhr-http/issues"
   },
-  "publishConfig":{
-    "registry":"http://common.host:8081/repository/npm-hosted"
+  "publishConfig": {
+    "registry": "http://common.host:8081/repository/npm-hosted"
   },
-  "homepage": "https://github.com/xzcode/xhr-http#readme"
+  "homepage": "https://github.com/xzcode/xhr-http#readme",
+  "devDependencies": {
+  }
 }

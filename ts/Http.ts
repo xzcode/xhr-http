@@ -1,7 +1,11 @@
+import { XhrProvider } from "./XhrProvider";
+
+
+
 /**
  * http连接工具类
  */
-class Http {
+export class Http {
 
     serverUrl:string;
     defaultParams:Object = {};
@@ -18,7 +22,8 @@ class Http {
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     }
- 
+
+
     /**
      * GET请求
      * @param path 请求路径
@@ -26,9 +31,15 @@ class Http {
      * @param successCallback 成功回调
      * @param errorCallback 错误回调
      */
-    get(path:string, params:Object, successCallback:Function, errorCallback:Function) {
-        this.sendRequest('GET', path, params, successCallback, errorCallback);
+    get(path:string, params:Object, successCallback:Function, errorCallback:Function):void;
+    get(path:string, params:Object, successCallback:Function):void;
+    get(path:string, successCallback:Function):void;
+    get(...args:any) : void{
+        this.sendRequest('GET', args[0], args[1], args[2], args[3]);
     }
+
+    
+    
  
     /**
      * post请求
@@ -43,7 +54,7 @@ class Http {
 
 
 
-    private sendRequest(method:string, path:string, params:Object, callback:Function, errorCallback:Function) {
+    private sendRequest(method:string, path:string, params:Object, callback:Function, errorCallback?:Function) {
         if (typeof (params) == 'function') callback = params;
         let xhr = this.xhrProvider.getXMLHttpRequest();
         xhr.timeout = 10000;// 10 seconds for timeout

@@ -1,4 +1,5 @@
-http/
+#http/
 tsconfig.json
 LICENSE
 package.json
+*.tgz

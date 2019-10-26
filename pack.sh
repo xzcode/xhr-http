@@ -1,0 +1,1 @@
+tsc && npm pack && npm publish

@@ -1,4 +1,4 @@
-interface XhrProvider {
+export interface XhrProvider {
 
     getXMLHttpRequest():XMLHttpRequest;
 
