@@ -1,0 +1,5 @@
+interface XhrProvider {
+
+    getXMLHttpRequest():XMLHttpRequest;
+
+}
