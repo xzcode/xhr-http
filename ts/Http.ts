@@ -7,13 +7,24 @@ import { XhrProvider } from "./XhrProvider";
  */
 export class Http {
 
-    serverUrl:string;
+    serverUrl:string = 'localhost';
     defaultParams:Object = {};
     xhrProvider: XhrProvider;
 
-    constructor(serverUrl:string = 'localhost', xhrProvider:XhrProvider) {
-        this.serverUrl = serverUrl;
-        this.xhrProvider = xhrProvider
+    /**
+     * 构造器
+     * @param serverUrl 服务器地址
+     * @param xhrProvider XMLHttpRequest对象提供者
+     */
+    constructor(serverUrl:string, xhrProvider:XhrProvider) 
+    /**
+     * 构造器
+     * @param serverUrl 服务器地址
+     */
+    constructor(serverUrl:string)
+    constructor(...args:any) {
+        this.serverUrl = args[0];
+        this.xhrProvider = args[1]
         this.defaultParams = {};
     }
     
