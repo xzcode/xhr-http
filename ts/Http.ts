@@ -1,4 +1,5 @@
 import { XhrProvider } from "./XhrProvider";
+import { IHeaderFiller } from "./IHeaderFiller";
 
 
 
@@ -10,6 +11,16 @@ export class Http {
     serverUrl:string = 'localhost';
     defaultParams:Object = {};
     xhrProvider: XhrProvider;
+    headerFillers: IHeaderFiller[] = [];
+
+    /**
+     * 
+     * @param serverUrl 服务器地址
+     * @param xhrProvider XMLHttpRequest对象提供者
+     * @param headerFillers 请求头填充器
+     */
+    constructor(serverUrl:string, xhrProvider:XhrProvider, headerFillers: IHeaderFiller[]) 
+
 
     /**
      * 构造器
@@ -22,16 +33,35 @@ export class Http {
      * @param serverUrl 服务器地址
      */
     constructor(serverUrl:string)
+
+    /**
+     * 基础构造器
+     * @param args 参数素组
+     */
     constructor(...args:any) {
         this.serverUrl = args[0];
         this.xhrProvider = args[1]
+        this.headerFillers = args[2]
         this.defaultParams = {};
     }
+
+    /**
+     * 添加请求头填充器
+     * @param headerFiller 请求头填充器
+     */
+    addHeaderFiller(headerFiller: IHeaderFiller) {
+        this.headerFillers.push(headerFiller);
+    }
     
- 
+    /**
+     * 设置请求头
+     * @param xhr 
+     */
     private setCommonHeaders(xhr:XMLHttpRequest):void {
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+        for (let index = 0; index < this.headerFillers.length; index++) {
+            let headerFiller = this.headerFillers[index];
+            headerFiller.fillerHeaders(xhr);
+        }
     }
 
 
